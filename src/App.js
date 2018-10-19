@@ -1,27 +1,40 @@
 import React, { Component } from 'react';
-import logo from './logo.svg';
+import moment from 'moment';
 import './App.css';
 
 class App extends Component {
+
+  constructor(props) {
+    super(props);
+
+    this.state = {
+      date: moment()
+    };
+  }
+// date button functions
+  hangleAddDay = () => {
+    this.setState( { date: this.state.date.add(1, 'day')} )
+  };
+  hangleSubtactDay = () => {
+    this.setState( { date: this.state.date.subtract(1, 'day')} )
+  }
+  
   render() {
-    return (
-      <div className="App">
-        <header className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          <p>
-            Edit <code>src/App.js</code> and save to reload.
-          </p>
-          <a
-            className="App-link"
-            href="https://reactjs.org"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Learn React
-          </a>
-        </header>
-      </div>
-    );
+
+  const {date} = this.state;
+
+  return(
+    <section>
+      <header>
+        <h1>My Budget</h1>
+        <div className='dateLine'>
+          <div className='dateButton' onClick={this.hangleAddDay}>+</div>
+          <p>{date.format('DD.MM.YYYY')}</p>
+          <div className='dateButton' onClick={this.hangleSubtactDay}>-</div>
+        </div>
+      </header>
+    </section>
+  )
   }
 }
 
